@@ -1,0 +1,51 @@
+{
+  "python": "3.12.14",
+  "platform": "macOS-26.3-arm64-arm-64bit",
+  "packages": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2",
+    "threadpoolctl": "3.8.0"
+  },
+  "features": [
+    "lag_1",
+    "lag_24",
+    "lag_168",
+    "mean_24",
+    "hour_sin",
+    "hour_cos",
+    "weekday_sin",
+    "weekday_cos",
+    "month_sin",
+    "month_cos",
+    "holiday",
+    "weekend"
+  ],
+  "configuration": {
+    "ridge_alpha": 1.0,
+    "mlp_hidden_layers": [
+      32
+    ],
+    "mlp_alpha": 0.0001,
+    "mlp_learning_rate": 0.001,
+    "mlp_max_iter": 400,
+    "mlp_seeds": [
+      7,
+      21,
+      42
+    ],
+    "batch_size": 64,
+    "tol": 0.0001,
+    "n_iter_no_change": 20
+  },
+  "processed_sha256": "410660778c5a0bb37472b5e5ff75e7e62fe1342a318e7e2e4f8f38ab4938aa15",
+  "experiment_sha256": "0783ff43c2edc1aa6789eb1282fdd70abca659aa26541d118f6212400a698178",
+  "train_first_utc": "2022-01-07 23:00:00+00:00",
+  "train_last_utc": "2022-08-31 21:00:00+00:00",
+  "validation_first_utc": "2022-08-31 22:00:00+00:00",
+  "validation_last_utc": "2022-10-31 22:00:00+00:00",
+  "test_evaluated": false,
+  "protocol": "rolling one-hour-ahead; observed past; fixed fitted models"
+}

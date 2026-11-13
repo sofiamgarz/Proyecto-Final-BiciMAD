@@ -1,0 +1,23 @@
+[
+  {
+    "seed": 7,
+    "iterations": 304,
+    "loss_scaled": 0.02360668953097025,
+    "seconds": 1.8644872917793691,
+    "warnings": []
+  },
+  {
+    "seed": 21,
+    "iterations": 143,
+    "loss_scaled": 0.0322685703878296,
+    "seconds": 0.8858426657970995,
+    "warnings": []
+  },
+  {
+    "seed": 42,
+    "iterations": 238,
+    "loss_scaled": 0.0293539762925135,
+    "seconds": 1.4761002080049366,
+    "warnings": []
+  }
+]

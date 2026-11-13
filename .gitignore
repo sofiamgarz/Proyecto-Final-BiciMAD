@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.DS_Store
+data/raw/*
+!data/raw/.gitkeep
+report/*.aux
+report/*.log
+report/*.out
+report/*.toc
+report/*.fls
+report/*.fdb_latexmk
+
+# El informe y sus fuentes se entregan por separado.
+/report/
+/informe*.pdf
+/informe*.tex
+/bicimad_entrega2_codigo.zip

@@ -1,0 +1,7 @@
+{
+  "check": "Fresh Python 3.12 environment; training from distributed aggregates",
+  "metrics_exact_match": true,
+  "predictions_exact_match": true,
+  "tests_passed": 10,
+  "holdout_evaluated": false
+}

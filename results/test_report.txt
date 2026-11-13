@@ -1,0 +1,4 @@
+Comando: python -m pytest -q
+Entorno limpio Python 3.12; datos agregados incluidos.
+..........                                                               [100%]
+10 passed in 1.04s

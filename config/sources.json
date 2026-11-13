@@ -1,0 +1,128 @@
+[
+  {
+    "path": "bicimad_2022.zip",
+    "url": "https://media.emtmadrid.es/-uHaW6iZkhG",
+    "source": "EMT Madrid; históricos biciMAD 2017-2023",
+    "license": "Open Data Commons Attribution License",
+    "sha256": "215c16391f09a386ac56030503c1978b291d6783c470fbc5cd2bbd9673789534",
+    "bytes": 315346750,
+    "access_date": "2026-11-13"
+  },
+  {
+    "path": "calendario.csv",
+    "url": "https://datos.madrid.es/dataset/300082-0-calendario_laboral/resource/300082-1-calendario_laboral-csv/download/300082-3-calendario_laboral-xls_v2.csv",
+    "source": "Ayuntamiento de Madrid; calendario laboral",
+    "license": "CC BY 4.0",
+    "sha256": "160e05dd8a095e8e09c931af0befd071cdc72cc97fe89868d21aced11ef2c3ec",
+    "bytes": 178534,
+    "access_date": "2026-11-13"
+  },
+  {
+    "path": "meteo/12.csv",
+    "url": "https://datos.madrid.es/dataset/300352-0-meteorologicos-horarios/resource/300352-0-meteorologicos-horarios-csv/download/300352-0-meteorologicos-horarios-csv.csv",
+    "source": "Ayuntamiento de Madrid; Datos meteorológicos horarios. Diciembre 2022",
+    "license": "CC BY 4.0",
+    "sha256": "d675b7cb756a5a53ff7aeac29dcfdd18a1d9b7ebc93afdd0071cba71e8816348",
+    "bytes": 231467,
+    "access_date": "2026-11-13"
+  },
+  {
+    "path": "meteo/11.csv",
+    "url": "https://datos.madrid.es/dataset/300352-0-meteorologicos-horarios/resource/300352-13-meteorologicos-horarios-csv/download/300352-13-meteorologicos-horarios-csv.csv",
+    "source": "Ayuntamiento de Madrid; Datos meteorológicos horarios. Noviembre 2022",
+    "license": "CC BY 4.0",
+    "sha256": "84c60c9276d16ff10495dcf3b788d9879779b96bfbe0ba14c49d1f9c7f56139b",
+    "bytes": 225065,
+    "access_date": "2026-11-13"
+  },
+  {
+    "path": "meteo/10.csv",
+    "url": "https://datos.madrid.es/dataset/300352-0-meteorologicos-horarios/resource/300352-26-meteorologicos-horarios-csv/download/300352-26-meteorologicos-horarios-csv.csv",
+    "source": "Ayuntamiento de Madrid; Datos meteorológicos horarios. Octubre 2022",
+    "license": "CC BY 4.0",
+    "sha256": "60fd256518a3a86c04dc9c5130246a932f682a2248f515a0146e91f4013a5545",
+    "bytes": 234273,
+    "access_date": "2026-11-13"
+  },
+  {
+    "path": "meteo/08.csv",
+    "url": "https://datos.madrid.es/dataset/300352-0-meteorologicos-horarios/resource/300352-47-meteorologicos-horarios-csv/download/300352-47-meteorologicos-horarios-csv.csv",
+    "source": "Ayuntamiento de Madrid; Datos meteorológicos horarios. Agosto 2022",
+    "license": "CC BY 4.0",
+    "sha256": "47733f09dfe1494f8ce35aec82d1086d60138b07d92c61732be5b3b2255d8442",
+    "bytes": 459115,
+    "access_date": "2026-11-13"
+  },
+  {
+    "path": "meteo/07.csv",
+    "url": "https://datos.madrid.es/dataset/300352-0-meteorologicos-horarios/resource/300352-58-meteorologicos-horarios-csv/download/300352-58-meteorologicos-horarios-csv.csv",
+    "source": "Ayuntamiento de Madrid; Datos meteorológicos horarios. Julio 2022",
+    "license": "CC BY 4.0",
+    "sha256": "8074875ada9c2d66e3de658a750412ffe3b076754164c643e778f1f475c18ff2",
+    "bytes": 452754,
+    "access_date": "2026-11-13"
+  },
+  {
+    "path": "meteo/06.csv",
+    "url": "https://datos.madrid.es/dataset/300352-0-meteorologicos-horarios/resource/300352-66-meteorologicos-horarios-csv/download/300352-66-meteorologicos-horarios-csv.csv",
+    "source": "Ayuntamiento de Madrid; Datos meteorológicos horarios. Junio 2022",
+    "license": "CC BY 4.0",
+    "sha256": "c36247668404a8bf8e52d05e277d0bb0b1b37aada196db00cf0c0d16bebf0e23",
+    "bytes": 463297,
+    "access_date": "2026-11-13"
+  },
+  {
+    "path": "meteo/03.csv",
+    "url": "https://datos.madrid.es/dataset/300352-0-meteorologicos-horarios/resource/300352-96-meteorologicos-horarios-csv/download/300352-96-meteorologicos-horarios-csv.csv",
+    "source": "Ayuntamiento de Madrid; Datos meteorológicos horarios. Marzo 2022",
+    "license": "CC BY 4.0",
+    "sha256": "6976cb6963e0ae3b376e3a87e29016c14c6b351e9a78d98d1d391d7f42b2c5e1",
+    "bytes": 478278,
+    "access_date": "2026-11-13"
+  },
+  {
+    "path": "meteo/02.csv",
+    "url": "https://datos.madrid.es/dataset/300352-0-meteorologicos-horarios/resource/300352-125-meteorologicos-horarios-csv/download/300352-125-meteorologicos-horarios-csv.csv",
+    "source": "Ayuntamiento de Madrid; Datos meteorológicos horarios. Febrero 2022",
+    "license": "CC BY 4.0",
+    "sha256": "3b148c3f4c5f30924ac68525f6059409c59d21900921693bb108e8e02da53bbb",
+    "bytes": 423627,
+    "access_date": "2026-11-13"
+  },
+  {
+    "path": "meteo/05.csv",
+    "url": "https://datos.madrid.es/dataset/300352-0-meteorologicos-horarios/resource/300352-134-meteorologicos-horarios-csv/download/300352-134-meteorologicos-horarios-csv.csv",
+    "source": "Ayuntamiento de Madrid; Datos meteorológicos horarios. Mayo 2022",
+    "license": "CC BY 4.0",
+    "sha256": "5e35eb96c76d2c798f55410594008d9e9f08de051e9dffd8ed1345a5d9cc0390",
+    "bytes": 495172,
+    "access_date": "2026-11-13"
+  },
+  {
+    "path": "meteo/01.csv",
+    "url": "https://datos.madrid.es/dataset/300352-0-meteorologicos-horarios/resource/300352-166-meteorologicos-horarios-csv/download/300352-166-meteorologicos-horarios-csv.csv",
+    "source": "Ayuntamiento de Madrid; Datos meteorológicos horarios. Enero 2022",
+    "license": "CC BY 4.0",
+    "sha256": "2bcd2f7f3e5ce3c9942c888b39bfda5a038e5fcfa223b052a4f679576570d040",
+    "bytes": 611203,
+    "access_date": "2026-11-13"
+  },
+  {
+    "path": "meteo/09.csv",
+    "url": "https://datos.madrid.es/dataset/300352-0-meteorologicos-horarios/resource/300352-202-meteorologicos-horarios-csv/download/300352-202-meteorologicos-horarios-csv.csv",
+    "source": "Ayuntamiento de Madrid; Datos meteorológicos horarios. Septiembre 2022",
+    "license": "CC BY 4.0",
+    "sha256": "5143727884375a22bd2f5ba29525eb803bdd42c036b8b6bbdc5ff80c3727b0ae",
+    "bytes": 221494,
+    "access_date": "2026-11-13"
+  },
+  {
+    "path": "meteo/04.csv",
+    "url": "https://datos.madrid.es/dataset/300352-0-meteorologicos-horarios/resource/300352-210-meteorologicos-horarios-csv/download/300352-210-meteorologicos-horarios-csv.csv",
+    "source": "Ayuntamiento de Madrid; Datos meteorológicos horarios. Abril 2022",
+    "license": "CC BY 4.0",
+    "sha256": "aad312bced9ccf63c5abf66d320b9a42d6fa3d5cd15347f231fb8b1806e2057c",
+    "bytes": 471119,
+    "access_date": "2026-11-13"
+  }
+]

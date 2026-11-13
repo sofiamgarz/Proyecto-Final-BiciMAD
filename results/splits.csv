@@ -1,0 +1,4 @@
+split,hours,observed,usable
+test,1464,1464,1464
+train,5831,5828,5660
+validation,1465,1463,1463

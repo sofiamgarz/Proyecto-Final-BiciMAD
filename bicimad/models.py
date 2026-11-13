@@ -23,7 +23,7 @@ from .features import NUMERIC
 
 
 def fallback_values(train, frame):
-    """Mediana por día de semana y hora; todo calculado solo en entrenamiento."""
+    """Calcula las medianas de entrenamiento por día de la semana y hora."""
     medians = train.groupby(["weekday", "hour"]).y.median()
     keys = pd.MultiIndex.from_frame(frame[["weekday", "hour"]])
     return pd.Series(medians.reindex(keys).to_numpy(), index=frame.index).fillna(train.y.median())
@@ -59,7 +59,7 @@ def evaluate(frame, root):
     pd.DataFrame({"feature": ridge[:-1].get_feature_names_out(NUMERIC), "coefficient_scaled_x": ridge[-1].coef_}).to_csv(root / "results/ridge_coefficients.csv", index=False)
 
     for seed in config["mlp_seeds"]:
-        # Sin parada temprana aleatoria: se usa la pérdida de entrenamiento.
+        # La parada depende de la pérdida de entrenamiento, sin separar filas al azar.
         net = MLPRegressor(hidden_layer_sizes=tuple(config["mlp_hidden_layers"]),
                            activation="relu", solver="adam", alpha=config["mlp_alpha"],
                            batch_size=config["batch_size"], learning_rate_init=config["mlp_learning_rate"],

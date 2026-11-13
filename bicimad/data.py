@@ -1,4 +1,4 @@
-"""Descarga verificada y limpieza de los doce CSV oficiales, sin publicar viajes."""
+"""Descarga y limpieza de los doce archivos mensuales de viajes."""
 
 import hashlib
 import io
@@ -21,7 +21,7 @@ def sha256(path):
 
 
 def download(root):
-    """Descarga sin extraer rutas de los ZIP y exige la versión inventariada."""
+    """Descarga los archivos y comprueba sus huellas SHA-256."""
     sources = json.loads((root / "config/sources.json").read_text())
     for source in sources:
         path = root / "data/raw" / source["path"]
@@ -40,15 +40,15 @@ def download(root):
 
 
 def localize_departures(values):
-    """Hipótesis de hora local; no inventa el desplazamiento de la hora repetida."""
+    """Convierte las fechas a hora de Madrid y marca las horas ambiguas."""
     naive = pd.to_datetime(values, errors="coerce")
     return naive.dt.tz_localize(TZ, ambiguous="NaT", nonexistent="NaT")
 
 
 def deduplicate(frame, seen_keys, seen_ids):
-    """Primera aparición estable; hash de clave compuesta y de idTrip si existe.
+    """Elimina duplicados y conserva la primera aparición de cada viaje.
 
-    No se escribe ningún identificador individual en los productos públicos.
+    Los identificadores individuales se utilizan solo durante la limpieza.
     La clave compuesta permite comparar también los meses sin idTrip.
     """
     keys = pd.util.hash_pandas_object(frame[KEY].astype("string"), index=False)
@@ -65,7 +65,7 @@ def deduplicate(frame, seen_keys, seen_ids):
 
 
 def make_hourly(times):
-    """Rejilla UTC regular; una hora sin registros queda desconocida, nunca cero."""
+    """Agrupa las salidas por hora UTC y mantiene los huecos sin rellenar."""
     grid = pd.date_range("2022-01-01", "2023-01-01", freq="h", inclusive="left", tz=TZ)
     grid = grid.tz_convert("UTC")
     counts = times.dt.tz_convert("UTC").dt.floor("h").value_counts().reindex(grid)
@@ -81,7 +81,7 @@ def make_hourly(times):
 
 
 def preprocess(root):
-    """Limpia todo el año con reglas fijas; no usa estadísticas de prueba."""
+    """Prepara la serie anual con los mismos criterios para los doce meses."""
     raw = root / "data/raw"
     audit, times, distributions = [], [], []
     seen_keys, seen_ids = set(), set()
@@ -127,7 +127,7 @@ def preprocess(root):
             a["duration_nonpositive"] = int(duration.le(0).sum())
             a["duration_over_24h"] = int(duration.gt(1440).sum())
             a["missing_station_lock"] = int(frame.station_lock.isna().sum())
-            # Se cuentan salidas: duración/destino son controles, no filtros futuros.
+            # Contamos las salidas aunque la duración o el destino tengan incidencias.
             a["departures_counted"] = len(frame)
             times.append(local)
             audit.append(a)
@@ -161,7 +161,7 @@ def prepare_calendar(path):
 def audit_weather(root):
     """Auditoría de cobertura de las fuentes opcionales; no entra en los modelos.
 
-    No se interpreta H01..H24 como UTC o local sin resolver antes su semántica.
+    La conversión de H01..H24 a una zona horaria queda pendiente.
     La tasa válida se calcula sobre estaciones × días × 24 de cada mes.
     """
     parts = [pd.read_csv(p, sep=";") for p in sorted((root / "data/raw/meteo").glob("*.csv"))]

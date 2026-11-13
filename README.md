@@ -4,17 +4,17 @@ Entrega 2 de Aprendizaje Automático · 13 de noviembre de 2026
 Sofía Muñiz Garzón · Alberto Caballero Lorente  
 Grado en Ingeniería Matemática · Universidad Francisco de Vitoria
 
-El proyecto compara dos referencias históricas, una regresión Ridge y un MLP para predecir cuántos viajes registrados se iniciarán en toda la red durante la siguiente hora. Se utiliza 2022 y se mantiene la separación temporal planteada en la primera entrega. Los resultados de esta versión son preliminares y proceden de una ejecución real de los archivos oficiales.
+En este proyecto comparamos dos referencias históricas, una regresión Ridge y un MLP para predecir cuántos viajes comenzarán en la red durante la siguiente hora. Hemos trabajado con los registros oficiales de 2022 y mantenemos la separación temporal de la primera entrega. Los resultados que presentamos son preliminares.
 
 ## Qué contiene esta entrega
 
-El preprocesado de la versión con calendario e historial está completo: lectura de los doce meses, limpieza, selección del ámbito, control de duplicados, tabla horaria, calendario, variables históricas y transformación ajustada solo con entrenamiento. Los primeros modelos se han ejecutado. Se incluye una auditoría de meteorología, que no forma parte de las entradas de esta versión. Quedan pendientes el ajuste de hiperparámetros, el análisis de sensibilidad y la evaluación final.
+Hemos completado el preprocesado con calendario e historial: lectura de los doce meses, limpieza, selección de viajes, eliminación de duplicados, tabla horaria, calendario y variables históricas. Las transformaciones se ajustan solo con entrenamiento. También hemos probado los primeros modelos y revisado la cobertura meteorológica, aunque todavía no utilizamos esas variables. Nos quedan el ajuste de hiperparámetros, el análisis de sensibilidad y la evaluación final.
 
-Noviembre y diciembre están preparados, pero **no se han evaluado**. El programa de esta entrega no contiene una opción para calcular sus métricas por accidente.
+Hemos reservado noviembre y diciembre para la prueba final. Sus datos están preparados, aunque **todavía no los hemos evaluado**; los comandos actuales calculan únicamente los resultados de validación.
 
 ## Inicio rápido: repetir los modelos
 
-Se ha comprobado con Python 3.12. Los CSV agregados incluidos permiten repetir los modelos sin descargar los viajes originales. Desde esta carpeta:
+Hemos ejecutado el proyecto con Python 3.12. Con los CSV agregados que incluimos se pueden repetir los modelos sin descargar los viajes originales. Desde la carpeta del repositorio:
 
 ```bash
 python3 -m venv .venv
@@ -26,7 +26,7 @@ python -m pytest -q
 
 En Windows, la activación es `.venv\Scripts\activate`. Si el ejecutable se llama `python` en lugar de `python3`, se utiliza ese nombre en la primera línea. Los cálculos se ejecutan en CPU; no hace falta GPU. La primera importación de las bibliotecas y la creación de la caché de fuentes pueden tardar más que el entrenamiento.
 
-`requirements.txt` fija las dependencias directas y `requirements-lock.txt` fija también las dependencias transitivas del entorno comprobado. El registro `results/run.json` recoge las versiones, variables, configuración, cortes y huellas utilizados. Diferencias de plataforma o bibliotecas numéricas pueden producir pequeñas variaciones en los últimos decimales.
+En `requirements.txt` recogemos las dependencias directas y en `requirements-lock.txt`, también sus dependencias y las versiones que hemos utilizado. El registro `results/run.json` recoge las versiones, variables, configuración, cortes y huellas utilizados. Diferencias de plataforma o bibliotecas numéricas pueden producir pequeñas variaciones en los últimos decimales.
 
 ## Reproducción completa desde las fuentes
 
@@ -34,7 +34,7 @@ En Windows, la activación es `.venv\Scripts\activate`. Si el ejecutable se llam
 python -m bicimad all
 ```
 
-Este comando descarga o verifica las fuentes, prepara los datos y repite EDA y modelos. El ZIP anual de EMT ocupa unos 301 MiB; hay otros archivos pequeños de calendario y meteorología. Se necesita conexión para la primera descarga y conviene disponer de varios GB de memoria para procesar los identificadores y cada mes. Los ZIP se leen en memoria de uno en uno, sin extraer rutas arbitrarias ni cargar todos los viajes en una única tabla.
+Este comando descarga o comprueba las fuentes, prepara los datos y repite el análisis exploratorio y los modelos. El ZIP anual de EMT ocupa unos 301 MiB; hay otros archivos pequeños de calendario y meteorología. Se necesita conexión para la primera descarga y conviene disponer de varios GB de memoria para procesar los identificadores y cada mes. El programa lee los ZIP de uno en uno, sin extraer su contenido al disco ni reunir todos los viajes en una sola tabla.
 
 También se pueden separar las etapas:
 
@@ -65,11 +65,11 @@ Los originales de `data/raw/` y los entornos virtuales se excluyen de Git. Las f
 ## Decisiones de preparación
 
 1. Los CSV se leen con separador `;`. Se eliminan las filas completamente vacías y se comprueba que estén las columnas necesarias. El identificador `idTrip` falta en febrero y agosto–diciembre.
-2. Se detectan duplicados por `idTrip` cuando existe y por una clave común formada por bicicleta, fecha de salida, fecha de llegada y estaciones. Se conserva la primera aparición, siguiendo el orden de meses y filas. Las claves se almacenan como hashes en memoria y no se publican. La comparación de claves cubre también las fronteras entre meses; la probabilidad de colisión del hash de 64 bits es pequeña, aunque no es una identidad matemática exacta.
+2. Para detectar duplicados, comprobamos `idTrip` cuando existe y una clave común formada por bicicleta, fecha de salida, fecha de llegada y estaciones. Se conserva la primera aparición, siguiendo el orden de meses y filas. Las claves se almacenan como hashes en memoria y no se publican. La comparación de claves cubre también las fronteras entre meses; la probabilidad de colisión del hash de 64 bits es pequeña, aunque no es una identidad matemática exacta.
 3. El ámbito operativo se fija en `fleet=1`, `unlocktype=STATION` y estación de origen positiva y entera. En los archivos inspeccionados la flota 1 solo presenta salidas de estación y la flota 2 mezcla tipos `FREE` y `STATION`. Se utiliza el código observado para delimitar la población, sin atribuirle categorías de usuarios no documentadas.
-4. La duración, la estación de destino y la fecha de llegada se revisan para calidad/identidad del registro, pero no entran en las variables predictoras. No se eliminan salidas válidas por una duración atípica: el objetivo es contar salidas registradas.
+4. Revisamos la duración, la estación de destino y la fecha de llegada para comprobar la calidad y detectar registros repetidos, aunque no las utilizamos como variables predictoras. No se eliminan salidas válidas por una duración atípica: el objetivo es contar salidas registradas.
 5. Las fechas sin zona se interpretan como hora local de Madrid. La ausencia de la hora inexistente de marzo es coherente con esta hipótesis. En octubre se excluyen las salidas de la hora repetida y se dejan desconocidas sus dos horas UTC, ya que no hay desplazamiento que permita distinguirlas. El índice final es regular, único y ordenado en UTC; el calendario se calcula en hora local.
-6. Las horas sin salidas registradas se dejan como desconocidas, sin imputar el objetivo. Esto es conservador: no se puede distinguir una ausencia real de viajes de una pérdida de información. No garantiza detectar pérdidas parciales. Se conservan los recuentos positivos, también los bajos del episodio de agosto.
+6. Las horas sin salidas registradas se dejan como desconocidas, sin imputar el objetivo. Hemos tomado esta decisión porque no podemos distinguir una ausencia real de viajes de una pérdida de información, aunque tampoco nos permite detectar todas las pérdidas parciales. Se conservan los recuentos positivos, también los bajos del episodio de agosto.
 7. Para predecir `y[t]`, que cuenta las salidas de `[t,t+1)`, se utilizan `y[t-1]`, `y[t-24]`, `y[t-168]` y la media de las 24 horas terminadas antes de `t`. Esta media se calcula después de desplazar la serie una hora. Los retardos miden horas transcurridas; alrededor del cambio de horario pueden diferir de la misma hora local del día o semana anterior.
 8. Hora, día de semana y mes se codifican con seno y coseno. Se añaden festivo y fin de semana. Son doce variables antes de los indicadores de ausencia. Las primeras 168 horas se excluyen. Los huecos de variables se imputan mediante la mediana de entrenamiento; los objetivos desconocidos se excluyen de ajuste y evaluación.
 
@@ -100,7 +100,7 @@ El MLP tiene una única capa de 32 neuronas, ReLU, Adam, lotes de 64, tasa de ap
 | MLP, semilla 21 | 130,13 | 174,24 |
 | MLP, semilla 42 | 123,46 | 167,91 |
 
-El MAE medio del MLP es 121,10, con desviación muestral entre semillas de 10,41. Estas tres repeticiones no proporcionan un intervalo de confianza. Ridge obtiene el menor MAE, de modo que el avance no confirma la hipótesis de mejora del 10 %. Los archivos CSV guardan las métricas con su precisión completa y las predicciones de cada hora.
+El MLP obtiene un MAE medio de 121,10 y una desviación muestral entre semillas de 10,41. Con estas tres repeticiones podemos observar su variación, pero no establecer un intervalo de confianza. Ridge obtiene el menor MAE, de modo que el avance no confirma la hipótesis de mejora del 10 %. Los archivos CSV guardan las métricas con su precisión completa y las predicciones de cada hora.
 
 ## Meteorología y tareas siguientes
 
@@ -108,7 +108,7 @@ El MAE medio del MLP es 121,10, con desviación muestral entre semillas de 10,41
 
 La meteorología queda fuera del modelo de esta entrega. Para añadirla se necesitaría fijar estaciones comparables y resolver la alineación de H01–H24 y su zona horaria antes de construir observaciones anteriores a la predicción. La versión actual con calendario e historial no depende de esas decisiones.
 
-Entre el 14 y el 20 de noviembre se prevé ajustar pocas configuraciones, comparar la estabilidad del MLP y estudiar la sensibilidad al episodio de actividad muy baja de agosto. Una vez cerrada la selección, se reajustará con enero–octubre y se evaluará noviembre–diciembre. El informe detalla prioridades, responsables y fechas. No se ha implementado todavía la selección final ni se han calculado resultados de prueba.
+Entre el 14 y el 20 de noviembre probaremos unas pocas configuraciones, compararemos la estabilidad del MLP y estudiaremos cómo afecta el episodio de actividad muy baja de agosto. Después de elegir la configuración, volveremos a entrenar con enero–octubre y evaluaremos noviembre–diciembre. En el informe detallamos las prioridades, los responsables y las fechas. La selección final y los resultados de prueba quedan para esa fase.
 
 ## Comprobaciones
 
@@ -127,7 +127,3 @@ Consulta y descarga: 13 de noviembre de 2026. Los originales se descargan con el
 ## Versión de la entrega
 
 [Repositorio del proyecto](https://github.com/sofiamgarz/Proyecto-Final-BiciMAD). Esta primera versión reúne el código, las tablas agregadas, los resultados y la documentación de la entrega 2. El informe se entrega por separado. Los archivos originales y los entornos virtuales quedan excluidos mediante `.gitignore`.
-
-## Uso de herramientas de apoyo
-
-Se utilizó Codex de OpenAI, basado en GPT-6, como apoyo a la implementación, ejecución, documentación y preparación del informe. Los resultados proceden de los datos oficiales y de las ejecuciones guardadas; la revisión de los supuestos y la comprensión del código siguen siendo responsabilidad de los autores. Se incluye esta declaración para mantener la coherencia con la guía de la asignatura.

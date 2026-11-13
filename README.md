@@ -123,7 +123,3 @@ Entre el 14 y el 20 de noviembre probaremos unas pocas configuraciones, comparar
 - Documentación oficial de [Ridge](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html) y [MLPRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPRegressor.html).
 
 Consulta y descarga: 13 de noviembre de 2026. Los originales se descargan con el programa y no están incluidos en el repositorio. No se asigna una nueva licencia a las fuentes ni se ha decidido una licencia pública para el código; esa decisión corresponde a sus autores.
-
-## Versión de la entrega
-
-[Repositorio del proyecto](https://github.com/sofiamgarz/Proyecto-Final-BiciMAD). Esta primera versión reúne el código, las tablas agregadas, los resultados y la documentación de la entrega 2. El informe se entrega por separado. Los archivos originales y los entornos virtuales quedan excluidos mediante `.gitignore`.
